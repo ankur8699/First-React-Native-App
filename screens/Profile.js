@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, Button ,Image } from "react-native";
+import { ScrollView,Text, StyleSheet, View, Button ,ImageBackground ,Image} from "react-native";
 
 import {
   Avatar,
@@ -8,22 +8,49 @@ import {
 
 export default Profile =() =>{
   return (
-  <View style={{ flex: 1 , margin:20}}>
+  <View style={{ flex:1, margin:20}}>
+    <ImageBackground 
+    style={styles.header}
+    source={require('../assets/men.png')}
+     />
+     <View style={styles.footer}>
+    <Text style={{textAlign:'center', justifyContent:'center',fontSize:30}}>Abcd Xyz </Text>
+    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}}>
+      <View style={{flexDirection:'column'}}>
+        <Text style={{fontSize:20,marginTop:10,}}>Orders</Text>
+        <Text style={{fontSize:15}}>15</Text>
+      </View>
+      <View style={{flexDirection:'column'}}>
+        <Text style={{fontSize:20,marginTop:5,}}>Offers</Text>
+        <Text style={{fontSize:15}}>0</Text>
+        </View>
+      <View style={{flexDirection:'column'}}>
+        <Text style={{fontSize:20,marginTop:5,}}>Messages</Text>
+        <Text style={{fontSize:15}}>20</Text>
+      </View>
+    </View>
+    <Text></Text>
+    
+    
+  
 
-    <Avatar.Image 
-    size={200}
-    source={require('../assets/men.png')} />
-    <Text style={{margin:10, textAlign:'center', justifyContent:'center',fontSize:40}}>Abcd Xyz </Text>
-    <Text style={{margin:2, padding:10,fontSize:20, borderColor:"grey", borderRadius:2, borderWidth:2}}>
-      Email:    abcd@gmail.com
-    </Text>
-    <Text style={{ margin:2,padding:10, fontSize:20, borderColor:"grey", borderRadius:2, borderWidth:2}}>
-      DOB:      November 11, 2002 
-    </Text>
-
-    <Text style={{ margin:2,padding:10,fontSize:20, borderColor:"grey", borderRadius:2, borderWidth:2}}>
-      Phone:   1234566 
-     
-    </Text>
+    
+    </View>
   </View>);
-};
+}
+
+const styles=StyleSheet.create({
+  header: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
+},
+  footer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+},
+});

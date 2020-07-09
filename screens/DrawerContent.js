@@ -30,18 +30,15 @@ import {
       <DrawerContentScrollView {...props}>
           <View style={styles.drawerContent}>
               <View style={styles.userInfoSection}>
-                  <View style={{flexDirection:'row',marginTop: 15}}>
+                  <View style={{backgroundColor:'#1F73D1'}}>
                       <Avatar.Image 
+                          style={{margin:10}}
                           source={require('../assets/men.png')}
                           size={70}
                       />
-                      <View style={{marginLeft:25, flexDirection:'column'}}>
-              <Title style={styles.title}>Abcd Xyz</Title>
-              <TouchableOpacity
-              style={styles.caption}
-              >
-             <Text>@Abcd_xyz</Text>
-             </TouchableOpacity>
+                      <View >
+                        <Title style={styles.title}>Abcd Xyz</Title>
+                        <Text style={styles.caption}>@Abcd_xyz</Text>
                       </View>
                   </View>
               </View>
@@ -122,20 +119,21 @@ import {
       flex: 1,
     },
     userInfoSection: {
-      paddingLeft: 20,
+      paddingLeft: 0,
     },
     title: {
-      fontSize: 20,
-      marginTop: 20,
-      fontWeight: 'bold',
+      fontSize: 25,
+      color:'#fff',
+      margin:10,
     },
     caption: {
-      fontSize: 14,
-      lineHeight: 14,
+      color:'#fff',
+      fontSize: 20,
       marginLeft:10,
+      marginBottom:10
     },
     row: {
-      marginTop: 20,
+      marginTop: 10,
       flexDirection: 'row',
       alignItems: 'center',
     },

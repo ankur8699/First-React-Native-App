@@ -65,10 +65,6 @@ const ProductDetails = ({ route, navigation }) => {
             </View>
             </View>
             </View>    
-        
-
-        
-        
         <View style={styles.card}>
             <ReadMore
             style={{margin:20,fontSize:15,color:'grey'}}
