@@ -79,19 +79,19 @@ import {
                       label="Details"
                       onPress={() => {props.navigation.navigate('Details')}}
                   />
-                  <DrawerItem 
+                  <DrawerItem
                   icon={() => (
                     <Icon 
-                    name="ios-build" 
+                    name="ios-attach" 
                     color='grey'
                     size={20}
                     />
                 )}
-                    
-                      label="Settings"
-                      onPress={() => {props.navigation.navigate('Settings')}}
-                  />
                   
+                      
+                      label="cart"
+                      onPress={() => {props.navigation.navigate('cart')}}
+                  />
               </Drawer.Section>
               
           </View>

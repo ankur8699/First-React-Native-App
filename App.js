@@ -6,7 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import {AuthContext} from  './components/context';
 import Details from './screens/Details';
-import Settings from './screens/Settings';
+import cart from './screens/cart';
 import Tabscreen from './screens/Tabscreen';
 import { DrawerContent } from './screens/DrawerContent';
 import RootStackScreen from './screens/RootScreen';
@@ -14,7 +14,12 @@ import { ActivityIndicator } from "react-native-paper";
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+const stack=createStackNavigator();
+
+
+
 const Drawer=createDrawerNavigator();
+
 
 const App =()=> {
   //const [isLoading , setIsLoading] =React.useState(true);
@@ -106,10 +111,8 @@ const App =()=> {
         { LoginState.userToken !== null ? (
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> }>
           <Drawer.Screen name="homepage"  component={Tabscreen} />
-          <Drawer.Screen name="Settings"  component={Settings} />
           <Drawer.Screen name="Details"  component={Details} />
-
-          
+          <Drawer.Screen name="cart"  component={cart} />
         </Drawer.Navigator>
         )
         :

@@ -10,18 +10,44 @@ import {
     StyleSheet,
     Linking
 } from 'react-native';
+import cart from './cart';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import ReadMore from 'react-native-read-more-text';
-
+import { Button } from 'react-native-paper';
 
 
 const ProductDetails = ({ route, navigation }) => {
-   
+  
+  const movetocart = (item) => {
+    navigation.navigate('cart', { products : item  } );
+    
+}
   const product = route.params.product;
-    return <View>
-        <Icon.Button name="ios-menu" size={25} backgroundColor="#1F73D1"  onPress={() => navigation.openDrawer()}>
-        <Text style={{padding:10, fontSize:20, fontWeight:'bold', color:'#fff'}}>Details</Text>
-        </Icon.Button>
+   
+  const Cartitems=({item})=>{
+    return <View style={{flexDirection:'row',backgroundColor:'#1F73D1',height:55}}>
+    <Icon name="ios-menu" size={25}  style={{color:'#fff',margin:15}} onPress={() => navigation.openDrawer()}></Icon>
+    <Text style={{padding:10, fontSize:25, fontWeight:'bold', color:'#fff'}}>{product.title}</Text>
+    <Icon size={35} style={{margin:10,marginLeft:210}} name='md-cart' color='#fff' 
+    onPress={()=>{movetocart(item)}}
+    ></Icon></View>
+  }
+
+  const Btn=({item})=>{
+    return <View style={{marginLeft:25,borderRadius:30,flexDirection:'row',width:220}}>
+      <Icon.Button size={25} style={{backgroundColor:'#1F73D1',color:'#fff',}} name='md-cart' color='#fff' 
+    onPress={()=>{movetocart(item)}}
+    >
+      <Text style={{backgroundColor:'#1F73D1',color:'#fff',fontSize:15,fontWeight:'bold'}}>ADD TO CART</Text>
+
+    </Icon.Button>
+      </View>
+  }
+    return (<View>
+      <Cartitems/>
     <ScrollView style={styles.scrollView}>
       <View style={styles.header}>
       <ScrollView
@@ -31,22 +57,23 @@ const ProductDetails = ({ route, navigation }) => {
             scrollEventThrottle={200}
             decelerationRate="fast"
             pagingEnabled>
-                <Image source={{ uri: product.image }} style={styles.imageStyle} />
-                <Image style={{margin:10,width:370, height:370}} source={require('../assets/sale.jpeg')}/>
-                <Image style={{margin:10,width:370, height:370}} source={require('../assets/saling.jpg')}/>
-                <Image style={{margin:10,width:370,height:370}} source={require('../assets/shop.jpeg')}/>
+                <Image source={{ uri: product.Images[0].img }} style={styles.imageStyle} />
+                <Image style={{margin:10 ,width:360, height:220}} source={{ uri: product.Images[0].img2}}/>
+                <Image style={{margin:10,width:360, height:220}} source={{ uri: product.Images[0].img3 }}/>
+                <Image style={{margin:10,width:360, height:220}} source={{ uri: product.Images[0].img4 }}/>
             </ScrollView>
             <View style={{backgroundColor:'#fff'}}>
-              <Text style={{ marginLeft:10,fontSize:20}}>Name of product</Text>
-              <Text style={{ marginLeft:10,fontSize:15,color:'grey'}}>Item Id: xxxx123xxxx{'\n'}</Text>
+    <Text style={{ marginLeft:10,fontSize:20}}>{product.title}</Text>
+    <Text style={{ marginLeft:10,fontSize:15,color:'grey'}}>xxxxxxx{product.id}{product.id}xx{'\n'}</Text>
               <View style={{flexDirection:'row'}}>
-                <Text style={{padding:10,marginLeft:10,fontSize:30, color:'#fff',backgroundColor:'#1F73D1',height:65,width:100}}> {'\u20B9'}{product.price-product.price*30/100}</Text>
+                <Text style={{padding:10,marginLeft:10,fontSize:30, color:'#000000'}}> {'\u20B9'}{product.price-product.price*30/100}</Text>
                   <View style={{flexDirection:'column'}}>
-                  <Text style={{marginLeft:10,fontSize:15,marginTop:15}}>MRP:  {'\u20B9'} {product.price}</Text>
-                  <Text style={{marginLeft:10,fontWeight:'bold',fontSize:15,color:'#1F73D1'}}>(Discount 30%){'\n'}</Text>
+                  <Text style={{marginLeft:0,fontSize:15,marginTop:15}}>MRP:  {'\u20B9'} {product.price}</Text>
+                  <Text style={{marginLeft:0,fontWeight:'bold',fontSize:15,color:'#1F73D1'}}>(Discount 30%){'\n'}</Text>
                   </View>
               </View>
             </View>
+            <Btn/>
 
             <View style={styles.card}>
             <Text style={{ margin:10,fontSize:20,fontWeight:'bold'}}>Silent Features</Text>
@@ -54,14 +81,12 @@ const ProductDetails = ({ route, navigation }) => {
             <View style={{flexDirection:"row",}}> 
             <Icon name="md-business" size={35} color="black" style={{marginLeft:10}}/>
             <Text style={{ 
-            marginTop:8,marginLeft:20,fontSize:15,color:'black',fontWeight:'bold'
-            }}>Delivery within 7 days</Text>
+            marginTop:8,marginLeft:20,fontSize:15,color:'black',fontWeight:'bold'}}>Delivery within 7 days</Text>
             </View>
             <View style={{flexDirection:"row",marginTop:10}}> 
             <Icon name="md-pricetags" size={35} color="black" style={{marginLeft:10}}/>
             <Text style={{ 
-            marginTop:8,marginLeft:20,fontSize:15,color:'black',fontWeight:'bold'
-            }}>Availabe at affordable prices</Text>
+            marginTop:8,marginLeft:20,fontSize:15,color:'black',fontWeight:'bold'}}>Availabe at affordable prices</Text>
             </View>
             </View>
             </View>    
@@ -71,20 +96,10 @@ const ProductDetails = ({ route, navigation }) => {
             numberOfLines={6}>
         <Text style={{ marginLeft:10,fontSize:20,fontWeight:'bold'}}>Description:{'\n'}</Text>
             <Text style={{marginLeft:20,fontSize:15,color:'grey'}}>
-            A product description is the marketing copy used to   
-            a compelling product description provides {'\n'}{'\n'}
-            Customers with details around features
-            problems it solves and other benefits to help generate
-            a sale.It’s no wonder they are worried — the quality of a product 
-            description can make or break a sale, especially if it doesn’t include 
-            the information a shopper needs to make a purchase decision. Providing 
-            key product details is critical if you want the shopper to click Add to Cart 
-            and differentiate your ecommerce website from the competition'
-            describe a product’s value proposition to potential .
+            {product.Description}
             </Text>
           </ReadMore>
           </View>
-
           <View style={styles.card}>
           <Text style={{marginLeft:10,fontSize:20,fontWeight:'bold'}}>Product Information{'\n'}</Text>
           <Text style={{marginLeft:10,fontSize:16,fontWeight:'bold'}}>MRP </Text>
@@ -104,7 +119,6 @@ const ProductDetails = ({ route, navigation }) => {
             Tel:- 9888899998   Email: care@gftpl.in
           </Text>
           </View>
-        
     </View>
     <View style={styles.footer}>
     <Text style={{ marginLeft:20,fontSize:15, color:'#fff'}}>Contact us:</Text>
@@ -126,18 +140,19 @@ const ProductDetails = ({ route, navigation }) => {
       style={{padding:10,marginLeft:5,marginBottom:20}}
       onPress={()=>{Linking.openURL('https://www.facebook.com/Great-Future-Technology-235676317322010')}}
       />
+
     </View>
     </View>
     </ScrollView>
-    </View>
+    </View>);
     
 }
 
 const styles = StyleSheet.create({
     imageStyle: {
-        margin:10,
-        height: 380,
-        width: 370,
+        margin:5,
+        height: 220,
+        width: 360,
         backgroundColor: '#d1d1d1'
  
   },

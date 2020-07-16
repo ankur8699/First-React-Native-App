@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import Home from './Home';
-import Settings from './Settings';
+import cart from './cart';
 import Profile from './Profile';
 
 const HomeStack = createStackNavigator();

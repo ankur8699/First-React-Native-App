@@ -15,7 +15,7 @@ import {
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { fetchProductsFromServer } from './api';
-import Modals from './modals';
+
 
 
 const Home = ({ route, navigation }) => {
@@ -24,6 +24,10 @@ const Home = ({ route, navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalsVisible, setModalsVisible] = useState(false);
     const [modallVisible, setModallVisible] = useState(false);
+    const [modalwVisible, setModalwVisible] = useState(false);
+    const [modalmVisible, setModalmVisible] = useState(false);
+    const [modalcVisible, setModalcVisible] = useState(false);
+    const [modalzVisible, setModalzVisible] = useState(false);
 
     useEffect(() => {
         fetchProducts();
@@ -45,45 +49,46 @@ const Home = ({ route, navigation }) => {
         });
 
     }
-     
-    
-    
     const moveOnDetailsPage = (item) => {
         navigation.navigate('Details', { product: item });
     }
 
-    const Web = () => {
-        render()
-        {
-            return(
-            <WebView
-            source={{
-              uri: 'https://shop.gftpl.in/'
-            }}
-          />);
-        }}
+   
 
     const _renderListItem = ({ item, index }) => {
         return <View>
         <TouchableOpacity onPress={() => moveOnDetailsPage(item)}>
-            <View style={{ flexDirection:'row',width:350, height: 120,margin:10,borderColor:'#fff',backgroundColor:'#fff', borderWidth:1, borderRadius:10}} >
-                <Image source={{ uri: item.image }} style={styles.imageStyle} />
+            <View style={{ flexDirection:'row',width:350, height: 160,margin:10,borderColor:'#fff',backgroundColor:'#fff', borderWidth:1, borderRadius:10}} >
+                <Image source={{ uri: item.Images[0].img }} style={styles.imageStyle} />
                 <View style={{flexDirection:'column'}}>
                 <View >
-                <Text style={{fontSize:25,margin:10}}>{item.category}</Text>
+    <Text style={{fontSize:10,margin:5}}>{item.title}</Text>
                 </View>
                 <View style={styles.viewStyle}>
-                    <Text>{item.title}</Text>
-                    <Text>{'\u20B9'}{item.price}</Text>
+                    <View>
+                    <Text>{item.category}</Text>
+                    <Text style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid',fontSize:18}}>{'\u20B9'}{item.price}</Text>
+                    <Text style={{fontSize:20,color:'#1F73D1',fontWeight:'bold'}}>{'\u20B9'}{item.price-item.price*30/100}</Text>
+                    
+                    </View>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={{marginLeft:60,marginTop:20,fontSize:20,color:'#000000'}}>Color</Text>
+                    <View style={{ flexDirection: 'row',marginLeft:60}}>
+                        <View style={{width:15 , height: 15,margin:2, backgroundColor: 'powderblue'}} />
+                        <View style={{width: 15, height: 15,margin:2, backgroundColor: 'skyblue'}} />
+                         <View style={{width: 15, height: 15,margin:2, backgroundColor: 'steelblue'}} />
+                    </View>
+                    </View>
               </View> 
                 </View>
                  
             </View>
         </TouchableOpacity>
+        
         </View>
     }
     return (
-        <ScrollView style={{flex: 1, padding: 20}}>
+        <ScrollView style={{flex: 1, padding:10}}>
             <ScrollView
             horizontal={true}
             contentContainerStyle={{width:`${100*3}%`}}
@@ -91,10 +96,8 @@ const Home = ({ route, navigation }) => {
             scrollEventThrottle={200}
             decelerationRate="fast"
             pagingEnabled>
-                <TouchableOpacity onPress={Web}>
+                <TouchableOpacity onPress={()=>{setModalwVisible(true);}}>
                 <Image style={{margin:10,width:350, height:200,marginBottom:10}} source={require('../assets/sale.jpeg')}/>
-
-
                 </TouchableOpacity>
                 <Image style={{margin:10,width:350, height:200,marginBottom:10}} source={require('../assets/saling.jpg')}/>
                 <Image style={{margin:10,marginBottom:10,width:350,height:200, marginBottom:10}} source={require('../assets/shop.jpeg')}/>
@@ -109,15 +112,90 @@ const Home = ({ route, navigation }) => {
                 <Text style={{ fontSize:20}}>Features
                 </Text>
             </View>
+            <View>
+                <Modal transparent={true} visible={modalwVisible}>
+                <View style={{backgroundColor:'#1F73D1', flex:2}}>
+                    <View style={{marginLeft:10 ,flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{fontSize:20, color:'#fff',padding:10, fontWeight:'bold'}}>WEB VIEW</Text>
+                    <Icon name="ios-close-circle" color='#fff' size={50} onPress={() => {setModalwVisible(!modalwVisible);}}/>
+                    </View>
+                    <WebView
+                    style={{height:200}}
+                    source={{
+                      uri: 'https://gftpl.in'
+                    }}
+                  />
+                   </View>
+                </Modal>
+            </View>
+
+
+            <View>
+                <Modal transparent={true} visible={modalmVisible}>
+                <View style={{backgroundColor:'#1F73D1', flex:2}}>
+                    <View style={{marginLeft:10 ,flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{fontSize:20, color:'#fff',padding:10, fontWeight:'bold'}}>IT SECURITY</Text>
+                    <Icon name="ios-close-circle" color='#fff' size={50} onPress={() => {setModalmVisible(!modalmVisible);}}/>
+                    </View>
+                    <WebView
+                    style={{height:200}}
+                    source={{
+                      uri: 'https://gftpl.in/services/it-security/'
+                    }}
+                  />
+                   </View>
+                </Modal>
+            </View>
+
+
+
+
+            <View>
+                <Modal transparent={true} visible={modalcVisible}>
+                <View style={{backgroundColor:'#1F73D1', flex:2}}>
+                    <View style={{marginLeft:10 ,flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{fontSize:20, color:'#fff',padding:10, fontWeight:'bold'}}>MANAGED IT SERVICES</Text>
+                    <Icon name="ios-close-circle" color='#fff' size={50} onPress={() => {setModalcVisible(!modalcVisible);}}/>
+                    </View>
+                    <WebView
+                    style={{height:200}}
+                    source={{
+                      uri: 'https://gftpl.in/services/managed-it-services/'
+                    }}
+                  />
+                   </View>
+                </Modal>
+            </View>
+
+
+
+
+            <View>
+                <Modal transparent={true} visible={modalzVisible}>
+                <View style={{backgroundColor:'#1F73D1', flex:2}}>
+                    <View style={{marginLeft:10 ,flexDirection:'row',justifyContent:'space-between'}}>
+                    <Text style={{fontSize:20, color:'#fff',padding:10, fontWeight:'bold'}}>CLOUD SOLUTIONS</Text>
+                    <Icon name="ios-close-circle" color='#fff' size={50} onPress={() => {setModalzVisible(!modalzVisible);}}/>
+                    </View>
+                    <WebView
+                    style={{height:200}}
+                    source={{
+                      uri: 'https://gftpl.in/services/cloud-solutions/'
+                    }}
+                  />
+                   </View>
+                </Modal>
+            </View>
+
+            
 
 
             <View>
                 <Modal transparent={true} visible={modalVisible}>
                 <View style={{backgroundColor:'#000000aa', flex:1}}>
                 <View style={{marginLeft:360}}>
-                    <Icon name="ios-close-circle" color='#fff' size={50} onPress={() => {setModalVisible(!modalVisible);}}/>
-                    </View>
-                   <View style={{backgroundColor:'#fff',padding:40,margin:40,flex:1,borderRadius:10}}>
+                    <Icon name="ios-close-circle" color='#fff' size={50} onPress={() => {setModalVisible(!modalVisible);}}/></View>
+                <View style={{backgroundColor:'#fff',padding:40,margin:40,flex:1,borderRadius:10}}>
                    <ScrollView>
                        <Text style={{padding:10,fontSize:20}}>DELIVERY POLICY</Text>
                        <Text>From the perspective of the customer, the delivery policy may be the most important legal document on a website. It should answer questions that are of keen interest to all customers: by what means will my goods be delivered? When will they be delivered?  Do I have to sign for delivery? Will I have to take a day off work?  And how much will it all cost?{'\n'}{'\n'}(1) A separate policy? The first question to ask yourself is whether the delivery policy should be part of the T&Cs of sale, or a separate document.Because it is one of the few sections of the T&Cs that customers may want to read, I normally advise keeping it separate from the rest of the T&Cs. However, if you're trying to keep your legal documentation to a minimum, then it's perfectly acceptable for the policy to form a section of the T&Cs.{'\n'}{'\n'}
@@ -203,9 +281,34 @@ const Home = ({ route, navigation }) => {
                 <Text>Assured Quality</Text>
                 </View>
                 </TouchableOpacity>
+
+                
             </ScrollView> 
+            <Text style={{margin:10,fontSize:20}}>OUR SERVICES</Text>
             
-            
+            <ScrollView
+                horizontal={true}
+                contentContainerStyle={{width:`${360}%`}}
+                showsHorizontalScrollIndicator={false}
+                scrollEventThrottle={200}
+                decelerationRate="fast"
+                pagingEnabled>
+                <TouchableOpacity 
+                onPress={()=>{setModalmVisible(true);}}>
+                <Image style={{margin:5,width:320, height:300,marginBottom:10}} source={require('../assets/security.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setModalcVisible(true);}}>
+                    <Image style={{margin:5,width:320, height:300,marginBottom:10}} source={require('../assets/managed-it.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setModalzVisible(true);}}>
+                    <Image style={{margin:5,marginBottom:10,width:320,height:300, marginBottom:20}} source={require('../assets/cloud.png')}/>
+               
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setModalwVisible(true);}}>
+                    <Image style={{margin:5,marginBottom:10,width:320,height:300, marginBottom:20}} source={require('../assets/consultancy.png')}/>
+                </TouchableOpacity>
+                </ScrollView>
+                <Text style={{margin:10,fontSize:20}}>OUR PRODUCTS</Text>
             {
                 isLoading && <ActivityIndicator size={'small'} />
             }
@@ -219,7 +322,6 @@ const Home = ({ route, navigation }) => {
             {
                 !isLoading && productList && productList.length <= 0 && <Text>No Result found.</Text>
             }
-
             </ScrollView>
     )
 
@@ -232,18 +334,18 @@ const styles = StyleSheet.create({
     
     imageStyle: {
         marginLeft:10,
-        height: 120,
+        height: 140,
         width: 140,
         marginBottom:10,
-        borderColor:'#DCDCDC',
-        borderWidth:2,
-        borderRadius:10
+       
         
         },
     viewStyle: {
         marginLeft:10,
-        marginTop:20,
         fontSize:25,
+        marginTop:10,
+        flexDirection:'row'
+
     },
     sepStyle: {
         height: 16,
